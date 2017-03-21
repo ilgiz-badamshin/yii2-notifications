@@ -81,6 +81,7 @@ Copyright 2015 Kevin Sylvestre
       this.bind = bind(this.bind, this);
       this.render = bind(this.render, this);
       this.settings = $.extend({}, Growl.settings, settings);
+      this.closeCallback = settings.closeCallback;
       this.$growls().attr('class', this.settings.location);
       this.render();
     }
@@ -125,7 +126,7 @@ Copyright 2015 Kevin Sylvestre
       event.preventDefault();
       event.stopPropagation();
       $growl = this.$growl();
-      return $growl.stop().queue(this.dismiss).queue(this.remove);
+      return $growl.stop().queue(this.dismiss).queue(this.remove(this.closeCallback));
     };
 
     Growl.prototype.cycle = function() {

@@ -32,6 +32,9 @@ var Notifications = (function(options) {
                     message: object.description,
                     url: object.url,
                     style: getType(object.type),
+                    closeCallback : function(){
+                        self.markSeen(object.id);
+                    }
                 }, self.opts.options));
             }
         },
