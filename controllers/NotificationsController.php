@@ -57,7 +57,7 @@ class NotificationsController extends Controller
                 'type' => $model->type,
                 'title' => $model->getTitle(),
                 'description' => $model->getDescription(),
-                'url' => Url::to(['notifications/rnr', 'id' => $model->id]),
+                'url' => ($model->getRoute())?Url::to(['notifications/rnr', 'id' => $model->id]):null,
                 'key' => $model->key,
                 'date' => $model->created_at
             ];
