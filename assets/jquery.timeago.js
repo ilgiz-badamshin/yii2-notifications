@@ -214,7 +214,8 @@
   }
 
   function distance(date) {
-    return (new Date().getTime() - date.getTime());
+    var today = new Date();
+    return (today.getTime() + (today.getTimezoneOffset()*60*1000) - date.getTime());
   }
 
   // fix for IE6 suckage
