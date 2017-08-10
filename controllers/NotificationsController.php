@@ -43,10 +43,14 @@ class NotificationsController extends Controller
     {
         /** @var Notification $class */
         $class = $this->notificationClass;
-        $models = $class::find()->where([
-            'user_id' => $this->user_id,
-            'seen' => $seen
-        ])->all();
+        $disabled_keys = $class::getDisabledKeys();
+        $models = $class::find()
+            ->andWhere([
+                'user_id' => $this->user_id,
+                'seen' => $seen,
+            ])
+            ->andFilterWhere(['not', ['key' => $disabled_keys]])
+            ->all();
 
         $results = [];
 
@@ -57,7 +61,7 @@ class NotificationsController extends Controller
                 'type' => $model->type,
                 'title' => $model->getTitle(),
                 'description' => $model->getDescription(),
-                'url' => ($model->getRoute())?Url::to(['notifications/rnr', 'id' => $model->id]):null,
+                'url' => ($model->getRoute()) ? Url::to(['notifications/rnr', 'id' => $model->id]) : null,
                 'key' => $model->key,
                 'date' => $model->created_at
             ];

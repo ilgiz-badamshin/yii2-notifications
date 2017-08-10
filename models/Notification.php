@@ -27,7 +27,7 @@ abstract class Notification extends ActiveRecord
     /**
      * Error notification
      */
-    const TYPE_ERROR   = 'error';
+    const TYPE_ERROR = 'error';
     /**
      * Warning notification
      */
@@ -46,6 +46,15 @@ abstract class Notification extends ActiveRecord
         self::TYPE_ERROR,
         self::TYPE_SUCCESS,
     ];
+
+    /**
+     * Gets array current available keys
+     * @return array
+     */
+    public static function getDisabledKeys()
+    {
+        return [];
+    }
 
     /**
      * Gets the notification title
