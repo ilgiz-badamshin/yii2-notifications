@@ -316,9 +316,11 @@ var Notifications = (function(options) {
                 }
             },
             dataType: "json",
-            complete: setTimeout(function() {
-                self.poll(opts)
-            }, opts.pollInterval),
+            complete: function () {
+                setTimeout(function () {
+                    self.poll(opts)
+                }, opts.pollInterval);
+            },
             timeout: opts.xhrTimeout
         });
     };
